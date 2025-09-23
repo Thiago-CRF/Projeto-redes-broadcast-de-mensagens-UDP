@@ -1,8 +1,3 @@
-"""
-client.py - UDP broadcast listener
-Uso:
-    python client.py --port 5000
-"""
 import socket
 import argparse
 import json

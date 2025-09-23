@@ -23,9 +23,9 @@ def ler_valores():
 def main():
     porta, intervalo, mensagem, broadcast = ler_valores()
 
-    print(f"Iniciando servidor de broadcast. Com a mensagem: '{mensagem}'")
+    print(f"\nIniciando servidor de broadcast. Com a mensagem: '{mensagem}'")
     print(f"Porta: {porta}, broadcast: {broadcast}, intervalo: {intervalo}")
-    print("Clique Ctrl+C para interromper o envio")
+    print("Clique Ctrl+C para interromper o envio\n")
 
 #cria um socket ipv4(AF_INET) e UDP(SOCK_DGRAM)
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -57,8 +57,5 @@ def main():
         print("Socket fechado") #Fecha o socket no final após interromper, ou se houver algum erro 
 
     
-
-
-
 if __name__ == "__main__":
     main()
