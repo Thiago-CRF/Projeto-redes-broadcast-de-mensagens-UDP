@@ -1,6 +1,5 @@
 import socket   #biblioteca pra manipular o socket UDP
 import time     
-import argparse #pra pegar argumentos pela linha de comando (a porta, mensagem e intervalo)
 import json     #para enviar a mensagem em json
 
 def ler_valores():
@@ -36,6 +35,26 @@ def main():
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
     conta = 0
+    try:
+        while True:
+            payload={
+                "conta": conta,
+                "timestamp": time.time(),
+                "mensagem": mensagem
+            }
+        #cria uma variavel dos dados enviados, transformando o payload em json pra ser enviado pelo UDP
+            dados = json.dumps(payload).encode("utf-8") 
+        #envia com sendto() para o endereço e portas definidas antes
+            sock.sendto(dados, (broadcast, porta))
+            print(f"Enviado. Envio #{conta} -> Porta: {porta}, endereço: {broadcast}")
+            conta += 1
+            time.sleep(intervalo)
+
+    except KeyboardInterrupt:
+        print("\nBroadcast interrompido pelo usuario")
+    finally:
+        sock.close()
+        print("Socket fechado") #Fecha o socket no final após interromper, ou se houver algum erro 
 
     
 
