@@ -1,12 +1,7 @@
-"""
-server.py - UDP broadcast server simples
-Uso:
-    python server.py --port 5000 --interval 2 --message "Olá, rede!"
-"""
-import socket
-import time
-import argparse
-import json
+import socket   #biblioteca pra manipular o socket UDP
+import time     
+import argparse #pra pegar argumentos pela linha de comando (a porta, mensagem e intervalo)
+import json     #para enviar a mensagem em json
 
 def main():
     parser = argparse.ArgumentParser(description="UDP broadcast server")
