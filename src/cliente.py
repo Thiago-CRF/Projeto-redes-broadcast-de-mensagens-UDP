@@ -34,15 +34,17 @@ def main():
                 obj = json.loads(texto) 
             #pega o tempo que a mensagem foi enviada e transforma em string, se não tiver timestamp ele pega o tempo do programa
                 timestamp = time.strftime("%H:%M:%S", time.localtime(obj.get("timestamp", time.time())))
-                
-                print(f"[{timestamp}] recebido de {endereço}: seq={obj.get('conta')} msg={obj.get('mensagem')}")
+            #printa a mensagem recebida com o tempo que foi enviado e endereço e numero de envio    
+                print(f"[{timestamp}] recebimento #{obj.get('conta')} do endereço {endereço}: {obj.get('mensagem')}\n")
+            
             except (ValueError, TypeError):
-                # se não for JSON, só imprime o texto cru
-                print(f"[{time.strftime('%H:%M:%S')}] recebido de {endereço}: {texto}")
+            #Imprime o texto cru se der erro de json 
+                print(f"[{time.strftime('%H:%M:%S')}] recebido do endereço ({endereço}): {texto}\n")
     except KeyboardInterrupt:
-        print("\nInterrompido pelo usuário")
+        print("Interrompido pelo usuário")
     finally:
         sock.close()
+        print("Socket fechado") #Fecha o socket no final após interromper, ou se houver algum erro
 
 if __name__ == "__main__":
     main()
