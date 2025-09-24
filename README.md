@@ -1,7 +1,8 @@
 # Projeto-redes-broadcast-de-mensagens-UDP
 
-Formato de uso do código de servidor no terminal:
-    python server.py --port 5000 --interval 2 --message "Olá, rede!"
+Formato de uso dos códigos é por chamada padrão no terminal
+    python cliente.py e python servidor.py
 
-Formato de uso do código de cliente no terminal:
-    python client.py --port 5000
+O servidor pergunta a porta, intervalo entre as mensagens, endereço broadcast e a mensagem a ser enviada
+
+O cliente pergunta qual porta quer escutar
