@@ -1,8 +1,8 @@
 import socket
-import json
 import time
+import json
 
-def ler_porta():
+def ler_porta():    #funçao pra ler a porta 
     porta_padrao = 5000
 
     porta = input(f"Digite a porta para escutar, ou clique enter para a porta padrão({porta_padrao}): ")
@@ -20,15 +20,15 @@ def main():
 
 #Associa o socket a porta escolhida e deiza aberto a todos os endereços
     sock.bind(("", porta))  # "" equivale a 0.0.0.0 (todas interfaces)
-    print(f"\nEscutando broadcasts pela porta {porta} em todos os endereços. Clique Ctrl+C para sair.")
+    print(f"\nEscutando broadcasts pela porta {porta} em todos os endereços. Clique Ctrl+C para sair.\n")
 
     try:
         while True:
         #recvfrom retorna (dados, (ip, porta)), fica bloqueado aqui até receber algo
             dados, endereço = sock.recvfrom(65535)  #65535 é o maximo de bytes que o pacote tem
-            
+        #tenta interpretar como JSON para converter em string, e substitiu byte invalido 
             texto = dados.decode("utf-8", errors="replace")
-        #tenta interpretar como JSON para converter em string, e substitiu byte invalido
+        
             try:
             #Tenta converter string em objeto (dicionario criado antes)
                 obj = json.loads(texto) 
@@ -40,6 +40,7 @@ def main():
             except (ValueError, TypeError):
             #Imprime o texto cru se der erro de json 
                 print(f"[{time.strftime('%H:%M:%S')}] recebido do endereço ({endereço}): {texto}\n")
+            
     except KeyboardInterrupt:
         print("Interrompido pelo usuário")
     finally:

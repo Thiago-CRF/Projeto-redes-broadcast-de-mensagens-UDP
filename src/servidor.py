@@ -37,7 +37,7 @@ def main():
     conta = 0
     try:
         while True:
-            payload={
+            payload={ #cria uma estrutura dicionario pra enviar 
                 "conta": conta,
                 "timestamp": time.time(),
                 "mensagem": mensagem
@@ -46,15 +46,15 @@ def main():
             dados = json.dumps(payload).encode("utf-8") 
         #envia com sendto() para o endereço e portas definidas antes
             sock.sendto(dados, (broadcast, porta))
-            print(f"Enviado. Envio #{conta} -> Porta: {porta}, endereço: {broadcast}")
+            print(f"Enviado. Envio #{conta} -> Porta: {porta}, endereço: {broadcast}\n")  #printa pra confirmar que enviou
             conta += 1
-            time.sleep(intervalo)
+            time.sleep(intervalo)   #espera para voltar o loop pelo tempo de intervalo
 
-    except KeyboardInterrupt:
-        print("\nBroadcast interrompido pelo usuario")
+    except KeyboardInterrupt:   #condição de interromper o try
+        print("Broadcast interrompido pelo usuario")
     finally:
         sock.close()
-        print("Socket fechado") #Fecha o socket no final após interromper, ou se houver algum erro 
+        print("Socket fechado") #fecha o socket no final após interromper, ou se houver algum erro 
 
     
 if __name__ == "__main__":
